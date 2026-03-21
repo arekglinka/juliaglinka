@@ -46,3 +46,7 @@ html { scroll-behavior: smooth; }
 .letter-spacing-wider { letter-spacing: 0.25em; }
 
 section { position: relative; }
+
+video {
+  object-fit: cover;
+}

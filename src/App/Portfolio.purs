@@ -107,11 +107,34 @@ renderNav _ =
           [ HH.text text ]
       ]
 
+renderVideoBackground :: forall cs m. String -> String -> String -> H.ComponentHTML Action cs m
+renderVideoBackground videoSrc posterSrc imgAlt =
+  HH.div [ HP.class_ (H.ClassName "absolute inset-0") ]
+    [ HH.img
+        [ HP.src posterSrc
+        , HP.alt imgAlt
+        , HP.class_ (H.ClassName "w-full h-full object-cover")
+        ]
+    , HH.element (HH.ElemName "video")
+        [ HP.attr (HH.AttrName "autoplay") ""
+        , HP.attr (HH.AttrName "loop") ""
+        , HP.attr (HH.AttrName "muted") ""
+        , HP.attr (HH.AttrName "playsinline") ""
+        , HP.attr (HH.AttrName "poster") posterSrc
+        , HP.class_ (H.ClassName "absolute inset-0 w-full h-full object-cover")
+        ]
+        [ HH.element (HH.ElemName "source")
+            [ HP.src videoSrc
+            , HP.type_ "video/mp4"
+            ]
+            []
+        ]
+    ]
+
 renderHero :: forall cs m. H.ComponentHTML Action cs m
 renderHero =
   HH.section [ HP.id "home", HP.class_ (H.ClassName "min-h-screen relative overflow-hidden") ]
-    [ HH.div [ HP.class_ (H.ClassName "absolute inset-0") ]
-        [ HH.img [ HP.src "./images/session-08.jpg", HP.alt "Elegancka sesja ciążowa", HP.class_ (H.ClassName "w-full h-full object-cover animate-slow-zoom") ] ]
+    [ renderVideoBackground "./videos/hero.mp4" "./images/session-08.jpg" "Elegancka sesja ciążowa"
     , HH.div [ HP.class_ (H.ClassName "absolute inset-0 gradient-overlay") ] []
     , HH.div [ HP.class_ (H.ClassName "relative z-10 min-h-screen flex flex-col justify-end pb-24 md:pb-32 px-8 md:px-16") ]
         [ HH.div [ HP.class_ (H.ClassName "max-w-4xl animate-fade-in") ]
@@ -263,8 +286,7 @@ galleryImageLarge src =
 renderFeaturedQuote :: forall cs m. H.ComponentHTML Action cs m
 renderFeaturedQuote =
   HH.section [ HP.class_ (H.ClassName "relative py-40 md:py-56 overflow-hidden") ]
-    [ HH.div [ HP.class_ (H.ClassName "absolute inset-0") ]
-        [ HH.img [ HP.src "./images/session-12.jpg", HP.alt "", HP.class_ (H.ClassName "w-full h-full object-cover") ] ]
+    [ renderVideoBackground "./videos/quote.mp4" "./images/session-12.jpg" ""
     , HH.div [ HP.class_ (H.ClassName "absolute inset-0 bg-stone-800/70") ] []
     , HH.div [ HP.class_ (H.ClassName "relative z-10 max-w-4xl mx-auto px-8 text-center") ]
         [ HH.blockquote_
@@ -374,8 +396,7 @@ testimonial name text =
 renderContact :: forall cs m. H.ComponentHTML Action cs m
 renderContact =
   HH.section [ HP.id "contact", HP.class_ (H.ClassName "relative py-32 md:py-48 overflow-hidden") ]
-    [ HH.div [ HP.class_ (H.ClassName "absolute inset-0") ]
-        [ HH.img [ HP.src "./images/session-15.jpg", HP.alt "", HP.class_ (H.ClassName "w-full h-full object-cover") ] ]
+    [ renderVideoBackground "./videos/contact.mp4" "./images/session-15.jpg" ""
     , HH.div [ HP.class_ (H.ClassName "absolute inset-0 bg-stone-900/80") ] []
     , HH.div [ HP.class_ (H.ClassName "relative z-10 max-w-4xl mx-auto px-8 text-center") ]
         [ HH.h2 [ HP.class_ (H.ClassName "font-display text-4xl md:text-6xl text-white mb-8 font-normal") ]

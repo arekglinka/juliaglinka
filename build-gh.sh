@@ -6,9 +6,19 @@ set -e
 
 echo "Building for GitHub Pages..."
 
+# Preserve CNAME (custom domain) before cleaning
+if [ -f docs/CNAME ]; then
+  cp docs/CNAME /tmp/CNAME.bak
+fi
+
 # Clean and create docs directory
 rm -rf docs
-mkdir -p docs/images
+mkdir -p docs/images docs/videos
+
+# Restore CNAME after clean
+if [ -f /tmp/CNAME.bak ]; then
+  mv /tmp/CNAME.bak docs/CNAME
+fi
 
 # Build PureScript project
 echo "Building PureScript project..."
@@ -37,6 +47,10 @@ cp dev/bundle.js docs/bundle.js
 # Copy images
 echo "Copying images..."
 cp -r dev/images/* docs/images/
+
+# Copy videos
+echo "Copying videos..."
+cp -r dev/videos/* docs/videos/ 2>/dev/null || true
 
 # Create .nojekyll file for GitHub Pages (to ignore _ folders)
 touch docs/.nojekyll
