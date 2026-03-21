@@ -395,18 +395,28 @@ testimonial name text =
 
 renderContact :: forall cs m. H.ComponentHTML Action cs m
 renderContact =
-  HH.section [ HP.id "contact", HP.class_ (H.ClassName "relative py-32 md:py-48 overflow-hidden") ]
-    [ renderVideoBackground "./videos/contact.mp4" "./images/session-15.jpg" ""
-    , HH.div [ HP.class_ (H.ClassName "absolute inset-0 bg-stone-900/80") ] []
-    , HH.div [ HP.class_ (H.ClassName "relative z-10 max-w-4xl mx-auto px-8 text-center") ]
-        [ HH.h2 [ HP.class_ (H.ClassName "font-display text-4xl md:text-6xl text-white mb-8 font-normal") ]
-            [ HH.text "Zarezerwuj sesję" ]
-        , HH.p [ HP.class_ (H.ClassName "font-body text-lg text-white/80 max-w-xl mx-auto mb-12") ]
-            [ HH.text "Chętnie odpowiem na wszystkie pytania i pomogę zaplanować wymarzoną sesję tego wyjątkowego czasu." ]
-        , HH.div [ HP.class_ (H.ClassName "flex flex-col md:flex-row justify-center items-center gap-8 md:gap-16 mb-12") ]
-            [ HH.a [ HP.href (decodeBase64 obfuscatedTel), HP.class_ (H.ClassName "font-body text-white hover:text-accent transition-colors") ]
+  HH.section [ HP.id "contact", HP.class_ (H.ClassName "py-24 md:py-40 bg-cream") ]
+    [ HH.div [ HP.class_ (H.ClassName "max-w-4xl mx-auto px-8") ]
+        [ HH.div [ HP.class_ (H.ClassName "text-center mb-12") ]
+            [ HH.p [ HP.class_ (H.ClassName "font-body text-sm tracking-widest uppercase text-accent mb-6") ]
+                [ HH.text "Rezerwacja" ]
+            , HH.h2 [ HP.class_ (H.ClassName "font-display text-4xl md:text-5xl text-stone-800 font-normal") ]
+                [ HH.text "Zarezerwuj sesję" ]
+            ]
+        -- Cal.com iframe embed
+        , HH.element (HH.ElemName "iframe")
+            [ HP.attr (HH.AttrName "src") "https://cal.com/YOUR_USERNAME/booking"
+            , HP.attr (HH.AttrName "loading") "lazy"
+            , HP.attr (HH.AttrName "sandbox") "allow-scripts allow-same-origin allow-forms allow-popups"
+            , HP.attr (HH.AttrName "style") "border:none;width:100%;height:100%;"
+            , HP.class_ (H.ClassName "min-h-[600px] md:min-h-[700px] w-full rounded-lg shadow-lg mb-12")
+            ]
+            []
+        -- Contact info preserved below widget
+        , HH.div [ HP.class_ (H.ClassName "flex flex-col md:flex-row justify-center items-center gap-8 md:gap-16 mb-8") ]
+            [ HH.a [ HP.href (decodeBase64 obfuscatedTel), HP.class_ (H.ClassName "font-body text-stone-500 hover:text-accent transition-colors") ]
                 [ HH.text (decodeBase64 obfuscatedTelText) ]
-            , HH.a [ HP.href (decodeBase64 obfuscatedEmail), HP.class_ (H.ClassName "font-body text-white hover:text-accent transition-colors") ]
+            , HH.a [ HP.href (decodeBase64 obfuscatedEmail), HP.class_ (H.ClassName "font-body text-stone-500 hover:text-accent transition-colors") ]
                 [ HH.text (decodeBase64 obfuscatedEmailText) ]
             ]
         , HH.div [ HP.class_ (H.ClassName "flex justify-center gap-8") ]
@@ -414,12 +424,12 @@ renderContact =
                 [ HP.href "https://www.instagram.com/julia_glinka_fotografia"
                 , HP.target "_blank"
                 , HP.rel "noopener noreferrer"
-                , HP.class_ (H.ClassName "font-body text-sm tracking-widest uppercase text-white/70 hover:text-white transition-colors border-b border-white/30 hover:border-white pb-1")
+                , HP.class_ (H.ClassName "font-body text-sm tracking-widest uppercase text-stone-400 hover:text-stone-800 transition-colors border-b border-stone-300 hover:border-stone-800 pb-1")
                 ]
                 [ HH.text "Instagram" ]
             , HH.a
                 [ HP.href (decodeBase64 obfuscatedEmail)
-                , HP.class_ (H.ClassName "font-body text-sm tracking-widest uppercase text-white/70 hover:text-white transition-colors border-b border-white/30 hover:border-white pb-1")
+                , HP.class_ (H.ClassName "font-body text-sm tracking-widest uppercase text-stone-400 hover:text-stone-800 transition-colors border-b border-stone-300 hover:border-stone-800 pb-1")
                 ]
                 [ HH.text "Email" ]
             ]
