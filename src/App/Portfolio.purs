@@ -403,13 +403,9 @@ renderContact =
             , HH.h2 [ HP.class_ (H.ClassName "font-display text-4xl md:text-5xl text-stone-800 font-normal") ]
                 [ HH.text "Zarezerwuj sesję" ]
             ]
-        -- Cal.com iframe embed
-        , HH.element (HH.ElemName "iframe")
-            [ HP.attr (HH.AttrName "src") "https://cal.com/YOUR_USERNAME/booking"
-            , HP.attr (HH.AttrName "loading") "lazy"
-            , HP.attr (HH.AttrName "sandbox") "allow-scripts allow-same-origin allow-forms allow-popups"
-            , HP.attr (HH.AttrName "style") "border:none;width:100%;height:100%;"
-            , HP.class_ (H.ClassName "min-h-[600px] md:min-h-[700px] w-full rounded-lg shadow-lg mb-12")
+        , HH.element (HH.ElemName "div")
+            [ HP.id "cal-booking"
+            , HP.class_ (H.ClassName "min-h-[600px] md:min-h-[700px] mb-12")
             ]
             []
         -- Contact info preserved below widget
